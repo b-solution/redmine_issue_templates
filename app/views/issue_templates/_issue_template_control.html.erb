@@ -10,6 +10,21 @@
 
 <%= javascript_tag do %>
   jQuery(document).ready(function($) {
+
     $('#issue_description_and_toolbar').append('<%= escape_javascript(html) %>');
+    $('.insert_template_button').on('click', function(){
+    oldVal = "";
+
+    if ($("#issue_description").val() != '') {
+    oldVal = $("#issue_description").val() + "\n\n";
+    }
+    try {
+    if (CKEDITOR.instances.issue_description)
+    CKEDITOR.instances.issue_description.setData(oldVal + $('#template_selector').val());
+    } catch(e) {
+    // do nothing.
+    }
+    })
+
   });
 <% end %>
